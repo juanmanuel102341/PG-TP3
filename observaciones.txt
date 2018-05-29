@@ -1,0 +1,3 @@
+falta colision con otro objeto
+falta ignorear release para el versionado
+falta copiar arhivos puntuales q se necesitan, no toda la carpeta de dll
