@@ -1,11 +1,12 @@
 #include <stdio.h>
-//#include "allegro5/allegro_image.h"
 #include <allegro5/allegro.h>
-
+#include <allegro5/allegro_image.h>
+#include<allegro5/allegro_native_dialog.h>
 const float FPS = 60;
 const int SCREEN_W = 640;
 const int SCREEN_H = 480;
 const int BOUNCER_SIZE = 32;
+ 
 enum MYKEYS {
 	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
 };
@@ -16,12 +17,15 @@ int main(int argc, char **argv)
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
 	ALLEGRO_BITMAP *bouncer = NULL;
-	float bouncer_x = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
-	float bouncer_y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
+	ALLEGRO_BITMAP *bouncer2 = NULL;
+	float bouncer_x, bouncer_y, bouncer2_x, bouncer2_y;
 	bool key[4] = { false, false, false, false };
 	bool redraw = true;
 	bool doexit = false;
-
+	int bouncer2_W;
+	int bouncer2_H;
+	int bouncer_W;
+	int bouncer_H;
 	if (!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -31,7 +35,11 @@ int main(int argc, char **argv)
 		fprintf(stderr, "failed to initialize the keyboard!\n");
 		return -1;
 	}
-
+	
+	if (!al_init_image_addon()) {
+		fprintf(stderr, "failed to initialize image addon!\n");
+		return -1;
+	}
 	timer = al_create_timer(1.0 / FPS);
 	if (!timer) {
 		fprintf(stderr, "failed to create timer!\n");
@@ -44,8 +52,10 @@ int main(int argc, char **argv)
 		al_destroy_timer(timer);
 		return -1;
 	}
+	
 
-	bouncer = al_create_bitmap(BOUNCER_SIZE, BOUNCER_SIZE);
+	bouncer = al_load_bitmap("Assets/_h.png");
+	bouncer2 = al_load_bitmap("Assets/enemy.png");
 	if (!bouncer) {
 		fprintf(stderr, "failed to create bouncer bitmap!\n");
 		al_destroy_display(display);
@@ -53,7 +63,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	al_set_target_bitmap(bouncer);
+	
 
 	al_clear_to_color(al_map_rgb(255, 0, 255));
 
@@ -79,6 +89,16 @@ int main(int argc, char **argv)
 	al_flip_display();
 
 	al_start_timer(timer);
+	bouncer2_W=al_get_bitmap_width(bouncer2);
+	bouncer2_H = al_get_bitmap_height(bouncer2);
+	bouncer_W = al_get_bitmap_width(bouncer);
+	bouncer_H = al_get_bitmap_height(bouncer);
+
+	bouncer_x=bouncer_W;
+	bouncer_y = SCREEN_H / 2.0 - bouncer_H/2;
+
+	 bouncer2_x = SCREEN_W - bouncer2_W;
+	 bouncer2_y = SCREEN_H / 2.0 - bouncer2_H / 2.0;
 
 	while (!doexit)
 	{
@@ -156,7 +176,7 @@ int main(int argc, char **argv)
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
 			al_draw_bitmap(bouncer, bouncer_x, bouncer_y, 0);
-
+			al_draw_bitmap(bouncer2, bouncer2_x, bouncer2_y,0);
 			al_flip_display();
 		}
 	}
