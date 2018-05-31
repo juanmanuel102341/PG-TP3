@@ -48,7 +48,9 @@ bool Game::Init() {
 void Game::Update() {
 	player->Move();
 	enemy->Move();
-	contact->Between();
+	if (contact->Between()) {
+		doexit = true;
+	}
 
 }
 void Game::Render() {

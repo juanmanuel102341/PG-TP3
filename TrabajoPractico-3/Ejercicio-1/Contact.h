@@ -7,7 +7,7 @@ class Contact
 public:
 	Contact(Entity*hero,Entity*enemy);
 	~Contact();
-	void Between();
+	bool Between();
 	
 private:
 	Entity* hero;
