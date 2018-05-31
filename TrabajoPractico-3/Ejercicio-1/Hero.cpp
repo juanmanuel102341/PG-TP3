@@ -7,20 +7,20 @@ al_draw_bitmap(bouncer, posx, posy, 0);
 }
 void Hero::Move(){
 	if (reg->key[KEY_UP] && posy >= 4.0) {
-				posy -= 4.0;
+				posy -= velocity;
 			}
 
 			if (reg->key[KEY_DOWN] && posy<= SCREEN_H - height - 4.0) {
-				posy += 4.0;
+				posy += velocity;
 			}
 
 			if (reg->key[KEY_LEFT] && posx >= 4.0) {
-				posx -= 4.0;
+				posx -= velocity;
 			}
 
 			if (reg->key[KEY_RIGHT] && posx <= SCREEN_W - width - 4.0) {
-				cout << "entrando";
-				posx+= 4.0;
+				
+				posx+= velocity;
 			}
 			
 			}
@@ -48,5 +48,6 @@ Hero::Hero(){
 	if (!Init()) {
 		cout << "hero no cargado" << endl;
 	}
+	velocity = 4.0f;
 
 }

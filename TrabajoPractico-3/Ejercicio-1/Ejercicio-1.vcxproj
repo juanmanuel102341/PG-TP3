@@ -135,6 +135,7 @@ copy "$(SolutionDir)allegro_5.1.12_x86\bin\allegro_dialog-debug-5.1.dll" "$(OutD
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -143,6 +144,7 @@ copy "$(SolutionDir)allegro_5.1.12_x86\bin\allegro_dialog-debug-5.1.dll" "$(OutD
     <ClCompile Include="Reg.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Contact.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />

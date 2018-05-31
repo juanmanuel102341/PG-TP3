@@ -4,7 +4,9 @@
 void Enemy::Draw(){
 	al_draw_bitmap(bouncer, posx, posy, 0);
 }
-void Enemy::Move(){}
+void Enemy::Move(){
+	posx -= velocity;
+}
 bool Enemy::Init(){
 	bouncer = al_load_bitmap("Assets/enemy.png");
 	if (!bouncer) {
@@ -28,5 +30,5 @@ Enemy::Enemy(){
 	if (!Init()) {
 		cout << "enemigo no cargdo" << endl;
 	}
-
+	velocity = 2.0f;
 }

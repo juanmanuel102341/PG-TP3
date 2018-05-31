@@ -9,6 +9,7 @@
 #include"Entity.h"
 #include"Hero.h"
 #include"Enemy.h"
+#include"Contact.h"
 using namespace std;
 
 
@@ -32,6 +33,7 @@ private:
 	Reg* reg;
 	Entity*player;
 	Entity*enemy;
+	Contact* contact;
 };
 
 #endif // !GAME_G

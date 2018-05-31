@@ -21,6 +21,7 @@ public:
 	int posy;
 	int width;
 	int height;
+	float velocity;
 	Reg* reg;
 private:
 	
