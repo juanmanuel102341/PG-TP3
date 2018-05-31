@@ -135,7 +135,19 @@ copy "$(SolutionDir)allegro_5.1.12_x86\bin\allegro_dialog-debug-5.1.dll" "$(OutD
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Reg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="Reg.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
