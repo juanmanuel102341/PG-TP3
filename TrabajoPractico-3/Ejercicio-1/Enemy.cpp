@@ -31,4 +31,5 @@ Enemy::Enemy(){
 		cout << "enemigo no cargdo" << endl;
 	}
 	velocity = 2.0f;
+	dead = true;
 }

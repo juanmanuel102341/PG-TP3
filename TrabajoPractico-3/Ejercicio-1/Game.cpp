@@ -41,16 +41,18 @@ bool Game::Init() {
 	reg = new Reg;
 	player = new Hero();
 	player->Set(reg);
-	enemy = new Enemy;
+	//enemy = new Enemy;
 	contact = new Contact(player, enemy);
+	spawnManager = new SpawnManager();
 	return true;
 }
 void Game::Update() {
 	player->Move();
-	enemy->Move();
-	if (contact->Between()) {
-		doexit = true;
-	}
+	//enemy->Move();
+	spawnManager->Update();
+	//if (contact->Between()) {
+		//doexit = true;
+	//}
 
 }
 void Game::Render() {
@@ -60,7 +62,8 @@ void Game::Render() {
 //	if (ev2.type == ALLEGRO_EVENT_TIMER) {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	player->Draw();
-	enemy->Draw();
+//	enemy->Draw();
+	spawnManager->Draw();
 	al_flip_display();
 	//}
 	
@@ -146,6 +149,7 @@ Game::Game() {
 	Run();
 }
 Game::~Game(){
+	delete spawnManager;
 	delete player;
 	delete enemy;
 	delete contact;

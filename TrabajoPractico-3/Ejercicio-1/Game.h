@@ -10,6 +10,7 @@
 #include"Hero.h"
 #include"Enemy.h"
 #include"Contact.h"
+#include"SpawnManager.h"
 using namespace std;
 
 
@@ -34,6 +35,7 @@ private:
 	Entity*player;
 	Entity*enemy;
 	Contact* contact;
+	SpawnManager* spawnManager;
 };
 
 #endif // !GAME_G

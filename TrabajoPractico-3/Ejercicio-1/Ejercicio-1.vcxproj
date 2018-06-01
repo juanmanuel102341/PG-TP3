@@ -142,6 +142,7 @@ copy "$(SolutionDir)allegro_5.1.12_x86\bin\allegro_dialog-debug-5.1.dll" "$(OutD
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Reg.cpp" />
+    <ClCompile Include="SpawnManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contact.h" />
@@ -150,6 +151,7 @@ copy "$(SolutionDir)allegro_5.1.12_x86\bin\allegro_dialog-debug-5.1.dll" "$(OutD
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Reg.h" />
+    <ClInclude Include="SpawnManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,24 +6,29 @@
 #include <stdio.h>
 #include"Reg.h"
 #include<iostream>
+
+
 using namespace std;
 class Entity
 {
 public:
 	Entity();
 	~Entity();
-	virtual bool Init()=0;
-	virtual void Move()=0;
-	virtual void Draw()=0;
+	virtual bool Init() = 0;
+	virtual void Move() = 0;
+	virtual void Draw() = 0;
 	ALLEGRO_BITMAP *bouncer = NULL;
-	virtual void Set(Reg* _reg)=0;
+	virtual void Set(Reg* _reg) = 0;
 	int posx;
 	int posy;
 	int width;
 	int height;
 	float velocity;
 	Reg* reg;
+	bool dead;
 private:
+
+	
 	
 };
 

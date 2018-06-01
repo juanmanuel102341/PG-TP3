@@ -49,5 +49,5 @@ Hero::Hero(){
 		cout << "hero no cargado" << endl;
 	}
 	velocity = 4.0f;
-
+	dead = false;
 }
