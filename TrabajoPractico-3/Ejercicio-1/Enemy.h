@@ -9,6 +9,7 @@ public:
 	virtual bool Init() ;
 	virtual void Move() ;
 	virtual void Draw() ;
+	void Update(double elpased);
 	virtual void Set(Reg* reg);
 private:
 

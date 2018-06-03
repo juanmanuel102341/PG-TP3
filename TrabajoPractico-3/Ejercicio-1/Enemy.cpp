@@ -7,6 +7,9 @@ void Enemy::Draw(){
 void Enemy::Move(){
 	posx -= velocity;
 }
+void Enemy::Update(double elapsed){
+
+}
 bool Enemy::Init(){
 	bouncer = al_load_bitmap("Assets/enemy.png");
 	if (!bouncer) {

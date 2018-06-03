@@ -14,7 +14,7 @@ if (timer > random) {
 	random = rand() % 100+100;
 	listEnemyActive.push_back( GetEnemy());
 	timer = 0;
-	cout << "random spawn " << random << endl;
+	//cout << "random spawn " << random << endl;
 }
 OutOfBounds();
 }
@@ -23,9 +23,9 @@ void SpawnManager::OutOfBounds(){
 		Entity*e = *it;
 		if (e->posx + e->width< 0) {
 			e->dead = true;
-			e->posx = -100;
+			//e->posx = -100;
 			listEnemyActive.erase(it);
-			cout << "fuera enemy";
+		//	cout << "fuera enemy";
 			break;
 		}
 	}
@@ -60,7 +60,7 @@ Entity* SpawnManager::GetEnemy () {
 			e->posy = y;
 			e->posx = SCREEN_W;
 			e->dead = false;
-			cout << "posy " << e->posy;
+		//	cout << "posy " << e->posy;
 			return e;
 		}
 		

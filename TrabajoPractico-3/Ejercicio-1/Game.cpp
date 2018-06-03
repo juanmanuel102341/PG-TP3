@@ -46,8 +46,8 @@ bool Game::Init() {
 	spawnManager = new SpawnManager();
 	return true;
 }
-void Game::Update() {
-	player->Move();
+void Game::Update(double elapsed) {
+	player->Update(elapsed);
 	//enemy->Move();
 	spawnManager->Update();
 	//if (contact->Between()) {
@@ -74,7 +74,8 @@ void Game::ProcessEvents(){
 	al_wait_for_event(event_queue, &ev);
 	if (ev.type == ALLEGRO_EVENT_TIMER) {
 	//logica del juego
-		Update();
+		double e= ev.timer.timestamp;
+		Update(e);
 		redraw = true;
 	}else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 		doexit = false;
@@ -95,6 +96,11 @@ void Game::ProcessEvents(){
 
 		case ALLEGRO_KEY_RIGHT:
 			reg->key[KEY_RIGHT] = true;
+			break;
+		case ALLEGRO_KEY_SPACE:
+
+			cout << "apreto spacce";
+			reg->key[KEY_SHOOT] = true;
 			break;
 		}
 	}
@@ -119,6 +125,10 @@ void Game::ProcessEvents(){
 		case ALLEGRO_KEY_ESCAPE:
 			doexit = true;
 			break;
+		case ALLEGRO_KEY_SPACE:
+			cout << "arriba space";
+		reg->key[KEY_SHOOT]= false;
+		break;
 		}
 	}
 		if (redraw && al_is_event_queue_empty(event_queue)) {
