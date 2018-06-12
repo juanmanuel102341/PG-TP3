@@ -16,6 +16,7 @@ void Hero::Update(double elpased) {
 	Move();
 	MoveBullets(elpased);
 	OutSceneBullet();
+	Respawn(elpased);
 }
 void Hero::Move(){
 	
@@ -39,7 +40,7 @@ void Hero::Move(){
 			
 			}
 void Hero::MoveBullets(double elapsed) {
-
+	
 	if (reg->key[KEY_SHOOT] == true&&elapsed>fireRate) {
 		cout << "disparo" << reg->key[KEY_SHOOT] << endl;
 		listBullets.push_back(GetBullet());
@@ -74,6 +75,8 @@ bool Hero::Init(){
 	}
 	width = al_get_bitmap_width(bouncer);
 	height = al_get_bitmap_height(bouncer);
+	widthBullet = al_get_bitmap_height(spriteBullet);
+	heightBullet = al_get_bitmap_height(spriteBullet);
 	posx = width;
 	posy = SCREEN_H / 2 - height / 2;
 	return true;
@@ -83,7 +86,30 @@ void Hero::CreateBullets() {
 	for (int i = 0; i < 15; i++) {
 		Entity::Bullet* e=new Bullet;
 		e->sprite = spriteBullet;
+		e->width = widthBullet;
+		e->height = heightBullet;
 		aBullets[i] = e;
+	}
+}
+void Hero::Respawn(double time){
+	bool active=false;
+	
+	if (dead&&lifes > 0) {
+		timeRespawn += 1;
+		active = true;
+		//cout << "respawntiempo" << endl;
+		//cout << "time respawn " << timeRespawn << endl;
+	}
+	else {
+	
+	}
+	if(timeRespawn > 75.0f&&active){
+		posx = width;
+		posy = SCREEN_H / 2 - height / 2;
+		dead = false;
+		time = 0;
+		timeRespawn = 0;
+	//	cout << "respawning" << endl;
 	}
 }
  Entity::Bullet* Hero::GetBullet(){
@@ -104,9 +130,23 @@ void Hero::CreateBullets() {
 }
 Hero::~Hero(){
 	al_destroy_bitmap(bouncer);
+	al_destroy_bitmap(spriteBullet);
+
+	
+	listBullets.clear();
+	for (int i = 0; i < 15; i++) {
+		Bullet* e = aBullets[i];
+		al_destroy_bitmap(e->sprite);
+		//delete e;
+	}
+	delete[]aBullets;
+
 }
 void Hero::Set(Reg*_reg){ 
 	reg = _reg;
+}
+void Hero::SetGui(Gui* _gui) {
+	gui = _gui;
 }
 Hero::Hero(){
 	if (!Init()) {
@@ -114,6 +154,8 @@ Hero::Hero(){
 	}
 	velocity = 4.0f;
 	dead = false;
-	CreateBullets();
 	fireRate = 0.5f;
+	lifes = 3;
+	CreateBullets();
+	
 }

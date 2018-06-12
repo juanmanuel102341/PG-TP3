@@ -15,6 +15,18 @@ bool Game::Init() {
 		fprintf(stderr, "failed to initialize image addon!\n");
 		return false;
 	}
+	if (!al_init_font_addon()) {
+		fprintf(stderr, "failed to initialize font addon!\n");
+		return false;
+	}
+	if (!al_init_ttf_addon()) {
+		fprintf(stderr, "failed to initialize tff addon!\n");
+		return false;
+	}
+	if (!al_install_mouse()) {
+		fprintf(stderr, "failed to initialize mouse addon!\n");
+		return false;
+	}
 	timer = al_create_timer(1.0 / FPS);
 	if (!timer) {
 		fprintf(stderr, "failed to create timer!\n");
@@ -42,33 +54,48 @@ bool Game::Init() {
 	player = new Hero();
 	player->Set(reg);
 	//enemy = new Enemy;
-	contact = new Contact(player, enemy);
 	spawnManager = new SpawnManager();
+	contact = new Contact(player, spawnManager);
+	gui = new Gui();
+	player->SetGui(gui);
+	menu = new Menu;
 	return true;
 }
 void Game::Update(double elapsed) {
-	player->Update(elapsed);
-	//enemy->Move();
-	spawnManager->Update();
-	//if (contact->Between()) {
-		//doexit = true;
-	//}
-
+	if (!menuActive) {
+		player->Update(elapsed);
+		//enemy->Move();
+		spawnManager->Update();
+		contact->Between();
+		contact->BulletHeroeEnemy();
+	}
+	else {
+		menu->Update();
+		if (menu->activeNewGame) {
+			menuActive = false;
+		}
+		else if (menu->activeExit) {
+			doexit=true;
+		}
+		
+	}
 }
 void Game::Render() {
-	
-	//ALLEGRO_EVENT ev2;
-	//al_wait_for_event(event_queue, &ev2);
-//	if (ev2.type == ALLEGRO_EVENT_TIMER) {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	player->Draw();
-//	enemy->Draw();
-	spawnManager->Draw();
-	al_flip_display();
-	//}
+	if (!menuActive)
+	{
+		player->Draw();
+		spawnManager->Draw();
+		gui->Draw();
+	}
+	else { 
+		menu->Draw();
+	}
+		al_flip_display();
 	
 	
-}
+	
+	}
 void Game::ProcessEvents(){
 	ALLEGRO_EVENT ev;
 	al_wait_for_event(event_queue, &ev);
@@ -102,6 +129,7 @@ void Game::ProcessEvents(){
 			cout << "apreto spacce";
 			reg->key[KEY_SHOOT] = true;
 			break;
+		
 		}
 	}
 	else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
@@ -163,6 +191,8 @@ Game::~Game(){
 	delete player;
 	delete enemy;
 	delete contact;
+	delete gui;
+	delete menu;
 	al_destroy_timer(timer);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);

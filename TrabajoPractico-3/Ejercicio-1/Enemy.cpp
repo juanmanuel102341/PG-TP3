@@ -25,6 +25,9 @@ bool Enemy::Init(){
 void Enemy::Set(Reg*_reg) {
 	reg = _reg;
 }
+void Enemy::SetGui(Gui* _gui) {
+	gui = _gui;
+}
 Enemy::~Enemy() {
 	al_destroy_bitmap(bouncer);
 }

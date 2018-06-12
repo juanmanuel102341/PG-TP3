@@ -12,6 +12,7 @@ public:
 	virtual void Move();
 	virtual void Draw();
 	virtual void Set(Reg* reg);
+	virtual void SetGui(Gui*_gui);
 	void Update(double elapsed);
 
 private:
@@ -21,8 +22,11 @@ private:
 	void MoveBullets(double elapsed);
 	void DrawBullets();
 	void OutSceneBullet();
+	void Respawn(double time);
 	Reg*reg;
 	int p;
 	double timing;
+	float timeRespawn=0;
+
 };
 #endif

@@ -5,12 +5,16 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include<allegro5/allegro_native_dialog.h>
+#include<allegro5/allegro_font.h>
+#include<allegro5/allegro_ttf.h>
 #include"Reg.h"
 #include"Entity.h"
 #include"Hero.h"
 #include"Enemy.h"
 #include"Contact.h"
 #include"SpawnManager.h"
+#include"Gui.h"
+#include"Menu.h"
 using namespace std;
 
 
@@ -31,11 +35,14 @@ private:
 	ALLEGRO_TIMER *timer = NULL;
 	bool doexit = false;
 	bool redraw = true;
+	bool menuActive=true;
 	Reg* reg;
 	Entity*player;
 	Entity*enemy;
 	Contact* contact;
 	SpawnManager* spawnManager;
+	Gui*gui;
+	Menu*menu;
 };
 
 #endif // !GAME_G

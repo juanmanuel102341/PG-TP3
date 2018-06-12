@@ -74,5 +74,14 @@ SpawnManager::SpawnManager() {
 	Create();
 }
 SpawnManager::~SpawnManager(){
-	
+	std::list<Entity*>::iterator it = listEnemyActive.begin();
+		
+	for (int i = 0; i < 10; i++) {
+		Entity* e = aEnemys[i];
+		al_destroy_bitmap(e->bouncer);
+		//delete e;
+	}
+	delete []aEnemys;
+	listEnemyActive.clear();
+
 }
